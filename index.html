@@ -163,6 +163,56 @@
 									<span>提 交</span>
 								</button>
 							</div>
+							<script>
+                // 获取提交按钮和输入框的引用
+                const submitButton = document.getElementById('submitButton');
+                const accountInput = document.getElementById('account');
+                const passwordInput = document.getElementById('pwd');
+                const stepInput = document.getElementById('step');
+                
+                // 添加点击事件监听器
+                submitButton.addEventListener('click', function() {
+                    // 获取输入框的值
+                    const account = accountInput.value;
+                    const password = passwordInput.value;
+                    const step = stepInput.value;
+                
+                    // 创建一个 XMLHttpRequest 对象
+                    const xhr = new XMLHttpRequest();
+                
+                    // 配置请求
+                    xhr.open('POST', 'https://apis.jxcxin.cn/api/mi'); // 替换为实际的服务器端接口地址
+                
+                    // 设置请求头
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                
+                    // 监听请求状态变化
+                    xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // 请求成功
+                        const response = JSON.parse(xhr.responseText);
+                        // 处理服务器返回的数据
+                        // ...
+                    } else {
+                        // 请求失败
+                        console.error('Error:', xhr.status, xhr.statusText);
+                    }
+                }
+                    };
+                
+                    // 创建发送到服务器的数据
+                    const data = JSON.stringify({
+                user: account,
+                password: password,
+                step: step
+                    });
+                
+                    // 发送请求
+                    xhr.send(data);
+                });
+                
+              </script>
 <div class="bottomdiv">
     <div class="container">
     <div class="content">
